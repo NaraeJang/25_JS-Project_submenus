@@ -51,8 +51,30 @@ linkBtns.forEach((btn) => {
     const center = (tempBtn.left + tempBtn.right) / 2;
     const bottom = tempBtn.bottom - 3;
 
-    submenu.classList.add("show");
-    submenu.style.left = `${center}px`;
-    submenu.style.top = `${bottom}px`;
+    const tempPage = sublinks.find(({ page }) => page === text);
+    if (tempPage) {
+      submenu.classList.add("show");
+      submenu.style.left = `${center}px`;
+      submenu.style.top = `${bottom}px`;
+
+      const { page, links } = tempPage;
+
+      submenu.innerHTML = `
+      <section>
+      <h4>
+      ${page}
+      </h4>
+      <div class="submenu-center col-2">
+      ${links
+        .map((link) => {
+          return `<a href="${link.url}>"><i class="${link.icon}"></i> ${link.label}</a>`;
+        })
+        .join("")}
+    
+      </div>
+      </section>
+ 
+      `;
+    }
   });
 });
