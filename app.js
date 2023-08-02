@@ -59,12 +59,21 @@ linkBtns.forEach((btn) => {
 
       const { page, links } = tempPage;
 
+      // OPTIONAL
+      let columns = `col-2`;
+      if (links.length === 3) {
+        columns = "col-3";
+      }
+      if (links.length > 3) {
+        columns = "col-4";
+      }
+
       submenu.innerHTML = `
       <section>
       <h4>
       ${page}
       </h4>
-      <div class="submenu-center col-2">
+      <div class="submenu-center ${columns}">
       ${links
         .map((link) => {
           return `<a href="${link.url}>"><i class="${link.icon}"></i> ${link.label}</a>`;
@@ -77,4 +86,14 @@ linkBtns.forEach((btn) => {
       `;
     }
   });
+});
+
+hero.addEventListener("mouseover", () => {
+  submenu.classList.remove("show");
+});
+
+nav.addEventListener("mouseover", (e) => {
+  if (!e.target.classList.contains("link-btn")) {
+    submenu.classList.remove("show");
+  }
 });
